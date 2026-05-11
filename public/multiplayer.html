@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multiplayer Quiz - QuizApp</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .lobby-container {
+      max-width: 600px;
+      margin: 4rem auto;
+      text-align: center;
+    }
+    .room-code-display {
+      font-size: 4rem;
+      font-weight: 800;
+      letter-spacing: 5px;
+      color: var(--primary-blue);
+      background: #e3f2fd;
+      padding: 1rem;
+      border-radius: var(--border-radius);
+      margin: 1rem 0;
+    }
+    .players-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+    .player-badge {
+      background: var(--color-blue);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-weight: 700;
+      animation: slideIn 0.3s;
+    }
+    
+    /* Quiz overrides for multiplayer */
+    #mpQuizContent { display: none; }
+    .mp-timer { font-size: 2rem; color: var(--color-red); font-weight: 800; text-align: center; margin-bottom: 1rem; }
+    
+    .mp-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .mp-btn {
+      padding: 2rem;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: white;
+      border: none;
+      border-radius: var(--border-radius);
+      cursor: pointer;
+    }
+    .mp-btn.opt-0 { background: var(--color-red); }
+    .mp-btn.opt-1 { background: var(--color-blue); }
+    .mp-btn.opt-2 { background: var(--color-yellow); color: black; }
+    .mp-btn.opt-3 { background: var(--color-green); }
+    
+    #mpLeaderboard { display: none; }
+  </style>
+  <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+  <div class="container" id="lobbyContainer">
+    <!-- Admin View -->
+    <div id="adminView" style="display: none;" class="lobby-container card">
+      <h2>Host a Game</h2>
+      <div class="form-group mt-1">
+        <select id="quizSelect" class="form-control">
+          <option value="">Select a Quiz...</option>
+        </select>
+      </div>
+      <button class="btn btn-primary btn-block mb-2" id="createRoomBtn">Create Room</button>
+      
+      <div id="adminLobby" style="display:none;">
+        <h3>Room Code:</h3>
+        <div class="room-code-display" id="adminRoomCode">----</div>
+        <p>Waiting for players...</p>
+        <div class="players-list" id="adminPlayersList"></div>
+        <button class="btn btn-danger btn-block mt-2" id="startQuizBtn">Start Quiz Now</button>
+      </div>
+    </div>
+
+    <!-- Player View -->
+    <div id="playerView" style="display: none;" class="lobby-container card">
+      <h2>Join a Game</h2>
+      <div class="form-group mt-1">
+        <input type="text" id="roomCodeInput" class="form-control text-center" placeholder="Enter Room Code" style="font-size: 1.5rem; text-transform: uppercase;">
+      </div>
+      <button class="btn btn-primary btn-block mb-2" id="joinRoomBtn">Join Room</button>
+      
+      <div id="playerLobby" style="display:none;">
+        <h3>You're in!</h3>
+        <p>Waiting for host to start...</p>
+        <div class="players-list" id="playerLobbyList"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Multiplayer Quiz Container -->
+  <div class="container" id="mpQuizContent" style="max-width: 800px; margin-top: 2rem;">
+    <div class="mp-timer" id="mpTimer">15</div>
+    <div class="card" style="text-align: center; margin-bottom: 2rem;">
+      <h2 id="mpQuestionText" style="font-size: 2rem;">Question Text</h2>
+    </div>
+    <div class="mp-options" id="mpOptions">
+      <!-- Options injected here -->
+    </div>
+    <div id="mpWaiting" style="display: none; text-align: center; font-size: 1.5rem; font-weight: 700; margin-top: 2rem;">
+      Waiting for others...
+    </div>
+  </div>
+
+  <!-- Multiplayer Leaderboard Container -->
+  <div class="container lobby-container card" id="mpLeaderboard">
+    <h2>Game Over!</h2>
+    <h3 class="mt-1">Final Rankings</h3>
+    <table class="table mt-1">
+      <thead>
+        <tr><th>Rank</th><th>Player</th><th>Score</th></tr>
+      </thead>
+      <tbody id="mpLeaderboardBody"></tbody>
+    </table>
+    <a href="/dashboard.html" class="btn btn-primary mt-2">Exit to Dashboard</a>
+  </div>
+
+  <script src="/js/app.js"></script>
+  <script src="/js/multiplayer.js"></script>
+</body>
+</html>

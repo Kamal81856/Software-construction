@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz in Progress</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    body {
+      background-color: #f8f9fa;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .quiz-header {
+      background: white;
+      padding: 1rem 2rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .timer {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--color-red);
+    }
+    .progress-text {
+      font-weight: 700;
+      color: var(--text-light);
+    }
+    .quiz-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem;
+      max-width: 800px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .question-card {
+      background: white;
+      width: 100%;
+      padding: 3rem 2rem;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      width: 100%;
+    }
+    .option-btn {
+      padding: 2rem;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: white;
+      border: none;
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      transition: transform 0.1s;
+      box-shadow: 0 4px 0 rgba(0,0,0,0.2);
+    }
+    .option-btn:active {
+      transform: translateY(4px);
+      box-shadow: 0 0 0 rgba(0,0,0,0.2);
+    }
+    .opt-0 { background-color: var(--color-red); }
+    .opt-1 { background-color: var(--color-blue); }
+    .opt-2 { background-color: var(--color-yellow); color: var(--text-dark); }
+    .opt-3 { background-color: var(--color-green); }
+    
+    .option-btn.selected {
+      border: 4px solid black;
+    }
+
+    .nav-buttons {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2rem;
+    }
+
+    #loading { text-align: center; margin-top: 5rem; }
+
+    @media (max-width: 600px) {
+      .options-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div id="loading"><h2>Loading Quiz...</h2></div>
+  
+  <div id="quizContent" style="display: none; height: 100%; display: flex; flex-direction: column;">
+    <div class="quiz-header">
+      <div class="progress-text">Question <span id="currentQNum">1</span> / <span id="totalQNum">10</span></div>
+      <div class="timer" id="timerDisplay">00:00</div>
+    </div>
+    
+    <div class="quiz-container">
+      <div class="question-card slide-in" id="questionText">
+        <!-- Question Text -->
+      </div>
+      
+      <div class="options-grid slide-in" id="optionsContainer">
+        <!-- Options Buttons -->
+      </div>
+
+      <div class="nav-buttons">
+        <button id="prevBtn" class="btn btn-primary" style="visibility: hidden;">Previous</button>
+        <button id="nextBtn" class="btn btn-primary">Next</button>
+        <button id="submitBtn" class="btn btn-danger" style="display: none;">Submit Quiz</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/app.js"></script>
+  <script src="/js/quiz.js"></script>
+</body>
+</html>

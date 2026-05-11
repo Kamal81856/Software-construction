@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - QuizApp</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .stat-card {
+      text-align: center;
+      padding: 2rem;
+    }
+    .stat-number {
+      font-size: 3rem;
+      font-weight: 800;
+      color: var(--primary-blue);
+      margin-bottom: 0.5rem;
+    }
+    .admin-actions {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="mb-2">Admin Dashboard</h1>
+    
+    <div class="admin-actions">
+      <a href="/admin-quiz.html" class="btn btn-primary">+ Create New Quiz</a>
+      <a href="/multiplayer.html?admin=true" class="btn" style="background-color: var(--color-yellow); color: black;">Host Multiplayer Game</a>
+    </div>
+
+    <div class="stats-grid" id="statsGrid">
+      <!-- Stats loaded via JS -->
+      <p>Loading stats...</p>
+    </div>
+
+    <h2 class="mb-1">All Quizzes</h2>
+    <div class="card p-0 mb-2">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Category</th>
+            <th>Questions</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="quizzesTable">
+          <!-- Loaded via JS -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script src="/js/app.js"></script>
+  <script src="/js/admin.js"></script>
+</body>
+</html>

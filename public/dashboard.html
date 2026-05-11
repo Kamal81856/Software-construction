@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - QuizApp</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="card mb-2" style="background-color: var(--primary-blue); color: white;">
+      <h1 id="welcomeName">Welcome!</h1>
+      <p>Points: <strong id="userPoints">0</strong> | Quizzes Completed: <strong id="userQuizzes">0</strong></p>
+    </div>
+
+    <h2 class="mb-1">Available Quizzes</h2>
+    <div id="quizList" class="quiz-grid">
+      <!-- Quizzes will be loaded here -->
+      <p>Loading quizzes...</p>
+    </div>
+  </div>
+
+  <script src="/js/app.js"></script>
+  <script src="/js/dashboard.js"></script>
+</body>
+</html>
